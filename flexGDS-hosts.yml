@@ -2,7 +2,7 @@
 - name: FlexBook GDS Playbook - hosts
   become: true
   hosts: all
-  remote_user: dpasek
+  remote_user: admin
   tasks:
 
   - name: copying hosts file with owner and permissions

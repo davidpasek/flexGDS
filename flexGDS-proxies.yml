@@ -2,7 +2,7 @@
 - name: FlexBook GDS Playbook - proxies
   become: true
   hosts: proxies
-  remote_user: dpasek
+  remote_user: admin
   tasks:
 
   - name: copying NGINX conf file 

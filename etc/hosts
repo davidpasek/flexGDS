@@ -12,12 +12,13 @@
 ::1			localhost localhost.flxb.local
 127.0.0.1		localhost localhost.flxb.local
 
-192.168.58.253 mgr.flxb.local mgr
-192.168.58.252 proxy.flxb.local proxy
+192.168.100.254 gw.flxb.local gw
+192.168.100.253 mgr.flxb.local mgr
+192.168.100.252 proxy.flxb.local proxy
 
-192.168.58.4 node1.flxb.local node1
-192.168.58.5 node2.flxb.local node2
+192.168.100.1 node1.flxb.local node1
+192.168.100.2 node2.flxb.local node2
 
-192.168.58.4 A.provider.flxb.local #running in node1
-192.168.58.5 B.provider.flxb.local #running in node2
+192.168.100.1 A.provider.flxb.local #running in node1
+192.168.100.2 B.provider.flxb.local #running in node2
 
