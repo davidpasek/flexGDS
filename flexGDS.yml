@@ -1,0 +1,3 @@
+---
+- import_playbook: flexGDS-hosts.yml
+- import_playbook: flexGDS-proxies.yml

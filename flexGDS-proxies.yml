@@ -1,0 +1,24 @@
+---
+- name: FlexBook GDS Playbook - proxies
+  become: true
+  hosts: proxies
+  remote_user: dpasek
+  tasks:
+
+  - name: copying NGINX conf file 
+    copy:
+      src: ./nginx/nginx.conf
+      dest: /usr/local/etc/nginx/nginx.conf
+      owner: root
+      group: wheel
+      mode: 0644
+  - name: copying NGINX index.html file
+    copy:
+      src: ./nginx/index.html
+      dest: /usr/local/www/nginx/index.html
+      owner: root
+      group: wheel
+      mode: 0644
+  - name: Finished message
+    debug:
+      msg: Job done!

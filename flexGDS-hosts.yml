@@ -1,0 +1,17 @@
+---
+- name: FlexBook GDS Playbook - hosts
+  become: true
+  hosts: all
+  remote_user: dpasek
+  tasks:
+
+  - name: copying hosts file with owner and permissions
+    copy:
+      src: ./etc/hosts
+      dest: /etc/hosts
+      owner: root
+      group: wheel
+      mode: 0644
+  - name: Finished message
+    debug:
+      msg: Job done!
