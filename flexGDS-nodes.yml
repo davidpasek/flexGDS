@@ -1,0 +1,29 @@
+---
+- name: FlexBook GDS Playbook - nodes
+  become: true
+  hosts: nodes
+  remote_user: admin
+  tasks:
+
+  - name: Install Apache
+    pkgng:
+      name: apache24
+      state: present
+  - name: Enable Apache
+    community.general.sysrc:
+      name: apache24_enable
+      value: "YES"
+  - name: copying Apache index.html file
+    copy:
+      src: ./apache/index.html
+      dest: /usr/local/www/apache24/data/index.html
+      owner: root
+      group: wheel
+      mode: 0644
+  - name: Restart Apache
+    service:
+      name: apache24
+      state: restarted
+  - name: Finished message
+    debug:
+      msg: Job done!
