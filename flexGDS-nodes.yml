@@ -5,25 +5,96 @@
   remote_user: admin
   tasks:
 
+  - name: Install MariaDB
+    pkgng:
+      name: mariadb104-server-10.4.22
+      state: present
+
+  - name: Enable MariaDB
+    community.general.sysrc:
+      name: mysql_enable
+      value: "YES"
+
+  - name: copying MariaDB conf file
+    copy:
+      src: ./mysql/my.cnf
+      dest: /usr/local/etc/mysql/my.cnf
+      owner: root
+      group: wheel
+      mode: 0644
+
+  - name: Restart MariaDB
+    service:
+      name: mysql-server
+      state: restarted
+
+  - name: Install PHP - part 1
+    pkgng:
+      name: php74 php74-extensions php74-curl php74-fileinfo php74-gd php74-iconv php74-json
+      state: present
+
+  - name: Install PHP - part 2
+    pkgng:
+      name: php74-mbstring php74-mysqli php74-openssl php74-session php74-xml php74-zlib
+      state: present
+
+  - name: copying PHP ini file
+    copy:
+      src: ./php/php.ini
+      dest: /usr/local/etc/php/php.ini
+      owner: root
+      group: wheel
+      mode: 0644
+
+  - name: Enable PHP-FPM
+    community.general.sysrc:
+      name: php_fpm_enable
+      value: "YES"
+
   - name: Install Apache
     pkgng:
       name: apache24
       state: present
+
   - name: Enable Apache
     community.general.sysrc:
       name: apache24_enable
       value: "YES"
-  - name: copying Apache index.html file
+
+  - name: copying Apache conf file
     copy:
-      src: ./apache/index.html
-      dest: /usr/local/www/apache24/data/index.html
+      src: ./apache/httpd.conf
+      dest: /usr/local/etc/apache24/httpd.conf
       owner: root
       group: wheel
       mode: 0644
+
+  - name: copying Apache PHP module conf file
+    copy:
+      src: ./apache/030_php-fpm.conf
+      dest: /usr/local/etc/apache24/modules.d/030_php-fpm.conf
+      owner: root
+      group: wheel
+      mode: 0644
+
+  - name: copying Apache index.php file
+    copy:
+      src: ./apache/index.php
+      dest: /usr/local/www/apache24/data/index.php
+      owner: root
+      group: wheel
+      mode: 0644
+
+  - name: Restart PHP-FPM
+    service:
+      name: php-fpm
+      state: restarted
+
   - name: Restart Apache
     service:
       name: apache24
       state: restarted
+
   - name: Finished message
     debug:
       msg: Job done!
