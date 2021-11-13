@@ -85,6 +85,14 @@
       group: wheel
       mode: 0644
 
+  - name: copying Apache info.php file
+    copy:
+      src: ./apache/info.php
+      dest: /usr/local/www/apache24/data/info.php
+      owner: root
+      group: wheel
+      mode: 0644
+
   - name: Restart PHP-FPM
     service:
       name: php-fpm
