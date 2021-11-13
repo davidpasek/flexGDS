@@ -101,10 +101,8 @@ http {
 
     }
 
-    #FlexBook Providers
     server {
       listen 80;
-      resolver 127.0.0.1;
       server_name ~^(?<subdomain>[\w-]+)\.provider\.flxb\.local$;
 
       location / {

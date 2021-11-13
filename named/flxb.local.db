@@ -1,0 +1,27 @@
+$TTL 10800
+flxb.local.    IN      SOA      ns1.flxb.local. proxy.flxb.local. (
+                                2021111302      ; Serial
+                                10800           ; Refresh
+                                3600            ; Retry
+                                604800          ; Expire
+                                300             ; Negative Response TTL
+                        )
+
+; DNS Servers
+                IN      NS      ns1.flxb.local.
+
+; MX Records
+;                IN      MX 10   mx.example.org.
+;                IN      MX 20   mail.example.org.
+
+; Segment 192.168.100.0/24
+gw            	 IN      A       192.168.100.254
+mgr            	 IN      A       192.168.100.253
+proxy          	 IN      A       192.168.100.252
+ns1          	 IN      A       192.168.100.252
+node1            IN      A       192.168.100.1
+node2            IN      A       192.168.100.2
+
+; Providers
+a.provider       IN      CNAME   node1
+b.provider       IN      CNAME   node2

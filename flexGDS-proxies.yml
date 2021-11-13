@@ -19,6 +19,46 @@
       owner: root
       group: wheel
       mode: 0644
+  - name: Install NGINX
+    pkgng:
+      name: nginx
+      state: present
+  - name: Enable NGINX
+    community.general.sysrc:
+      name: nginx_enable
+      value: "YES"
+  - name: Restart NGINX
+    service:
+      name: nginx
+      state: restarted
+    become: yes
+  - name: Install BIND
+    pkgng:
+      name: bind916
+      state: present
+  - name: Enable NAMED
+    community.general.sysrc:
+      name: named_enable
+      value: "YES"
+  - name: copying NAMED conf file 
+    copy:
+      src: ./named/named.conf
+      dest: /usr/local/etc/namedb/named.conf
+      owner: root
+      group: wheel
+      mode: 0644
+  - name: copying NAMED master db file - flxb.local.db
+    copy:
+      src: ./named/flxb.local.db
+      dest: /usr/local/etc/namedb/master/flxb.local.db
+      owner: root
+      group: wheel
+      mode: 0644
+  - name: Restart BIND (NAMED)
+    service:
+      name: named
+      state: restarted
+    become: yes
   - name: Finished message
     debug:
       msg: Job done!
